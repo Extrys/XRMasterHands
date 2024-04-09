@@ -10,7 +10,7 @@ public class PinchJoystickSimulator : MonoBehaviour, IJoystickSimulator
 	public Transform character;
 	public float maxDistance = 0.2f;
 	public Vector2 joystickVector;
-	public float visualVerticalPermisivity = 1f;
+	public float visualVerticalPermisivity = .1f;
 	XRHandJointsUpdatedEventArgs jointsUpdatedEventArgs;
 
 	public byte X => (byte)((1 + joystickVector.x) * 127);
