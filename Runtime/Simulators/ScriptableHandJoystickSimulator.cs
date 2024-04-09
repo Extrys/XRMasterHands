@@ -5,7 +5,7 @@ using UnityEngine.XR.Hands;
 [CreateAssetMenu(fileName = "ScriptableHandJoystickSimulator", menuName = "XRMasterHands/ScriptableHandJoystickSimulator")]
 public class ScriptableHandJoystickSimulator : ScriptableJoystickSimulator
 {
-	public float arrowWidth = 0.1f;
+	public float arrowWidth = 0.01f;
 	public Material arrowMaterial;
 	public override IJoystickSimulator GenerateSimulator(IStatePerformer statePerformer, XRHandJointsUpdatedEventArgs jointsUpdatedEventArgs)
 	{
