@@ -1,0 +1,22 @@
+{
+    "name": "SquirrelBytes.XRMasterHands.Editor",
+    "rootNamespace": "",
+    "references": [
+        "Unity.XR.Hands",
+        "SquirrelBytes.XRMasterHands",
+        "Unity.InputSystem",
+        "SquirrelBytes.XRMasterHands.Gestures",
+        "SquirrelBytes.XRMasterHands.Simulators"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

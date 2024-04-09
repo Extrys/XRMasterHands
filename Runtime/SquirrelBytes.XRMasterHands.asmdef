@@ -1,0 +1,27 @@
+{
+    "name": "SquirrelBytes.XRMasterHands",
+    "rootNamespace": "",
+    "references": [
+        "Unity.XR.Hands",
+        "Unity.InputSystem",
+        "Unity.XR.CoreUtils",
+        "SquirrelBytes.XRMasterHands.Simulators",
+        "SquirrelBytes.XRMasterHands.Gestures",
+        "SquirrelBytes.XRMasterHands.Abstractions"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "Select...",
+            "expression": "",
+            "define": ""
+        }
+    ],
+    "noEngineReferences": false
+}

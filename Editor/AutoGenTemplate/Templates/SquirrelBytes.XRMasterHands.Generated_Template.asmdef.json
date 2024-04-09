@@ -1,0 +1,20 @@
+{
+    "name": "SquirrelBytes.XRMasterHands.Generated",
+    "rootNamespace": "",
+    "references": [
+        "Unity.XR.Hands",
+        "Unity.InputSystem",
+        "SquirrelBytes.XRMasterHands.Simulators",
+        "SquirrelBytes.XRMasterHands",
+        "SquirrelBytes.XRMasterHands.Abstractions"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

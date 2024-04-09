@@ -1,0 +1,20 @@
+{
+    "name": "com.squirrelbytes.xrmasterhands",
+    "version": "0.1.0",
+    "displayName": "XR Master Hands",
+    "description": "Framework for simplifying the usage of XR Hands by automagically creating a special XR Device which implements designed hand poses as buttons for using with the unity's Input System Package",
+    "unity": "2022.3",
+    "unityRelease": "17f1",
+    "documentationUrl": "https://example.com/",
+    "changelogUrl": "https://example.com/changelog.html",
+    "licensesUrl": "https://example.com/licensing.html",
+    "dependencies": {
+      "com.unity.xr.hands": "1.4.0",
+      "com.unity.inputsystem": "1.7.0"
+   },
+   "keywords": ["XR", "Hands", "Master", "Gestures", "Poses"],
+    "author": {
+      "name": "Extrys from SquirrelBytes",
+      "url": "https://github.com/Extrys"
+    }
+  }

@@ -1,0 +1,107 @@
+/*
+Note: 
+This file is updates automagically.
+Do not remove or make changes inide autogen regions or changes will be lost upon regeneration.
+*/
+
+using System;
+using System.Runtime.InteropServices;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
+using UnityEngine.InputSystem.Layouts;
+using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.InputSystem.Utilities;
+using UnityEngine.XR.Hands;
+
+[InputControlLayout(commonUsages = new string[] { "Left", "Right" }, isGenericTypeOfDevice = true, stateType = typeof(State), displayName = "XRMasterHand")]
+public class HandProxyDevice : InputDevice, IHandProxyDevice
+{
+	public Handedness Handeness { get; private set; }
+
+	IJoystickSimulator joystickSimulator = new NullJoystickSimulator();
+	[InputControl] public Vector2Control joystick { get; private set; }
+	[InputControl] public ButtonControl JoystickStarter { get; private set; }
+	#region PROXIED_BUTTONCONTROLS ---> AUTOGEN
+	#endregion
+
+	protected override void FinishSetup()
+	{
+		joystick = GetChildControl<Vector2Control>("joystick");
+		JoystickStarter = GetChildControl<ButtonControl>("JoystickStarter");
+		#region BUTTONCONTROLS_SETUP ---> AUTOGEN
+		#endregion
+		base.FinishSetup();
+	}
+
+	public void SetJoystickSimulator(IJoystickSimulator joystickSimulator) => this.joystickSimulator = joystickSimulator;
+	public void SetStreams(HandProxyGestureDescription desc, XRMasterHand xrMasterHand)
+	{
+		joystickStarterStream = desc.GenerateJoystickStarterStream(xrMasterHand);
+		streams = desc.GenerateStreams(xrMasterHand);
+		SetJoystickSimulator(desc.GenerateJoystickSimulator(joystickStarterStream, xrMasterHand.handJointsUpdatedEventArgs));
+	}
+
+	HandGestureStream joystickStarterStream;
+	HandGestureStream[] streams;
+
+	State state;
+	public void RefreshInputs()
+	{
+		state = new State
+		{
+			joystickX = joystickSimulator.X,
+			joystickY = joystickSimulator.Y,
+			joystickStarter = joystickStarterStream.performState,
+			#region POSE_WRITES ---> AUTOGEN
+			#endregion
+		};
+		InputSystem.QueueStateEvent(this, state);
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public struct State : IInputStateTypeInfo
+	{
+		public FourCC format => new FourCC('H', 'T', 'P', 'C');
+		//Joystick Definition 
+		[InputControl(name = "joystick", layout = "Vector2", format = "VC2B")]
+		[InputControl(name = "joystick/x", offset = 0, format = "BYTE", parameters = "normalize,normalizeMin=0,normalizeMax=0.996078431372549,normalizeZero=0.5")] public byte joystickX;
+		[InputControl(name = "joystick/y", offset = 1, format = "BYTE", parameters = "normalize,normalizeMin=0,normalizeMax=0.996078431372549,normalizeZero=0.5")] public byte joystickY;
+		[InputControl(name = "joystickStarter", layout = "Button", bit = 0)] public byte joystickStarter;
+		//Autogen button definitions
+		#region POSE_UINTS ---> AUTOGEN
+		#endregion
+
+	}
+
+	public static HandProxyDevice GetOrCreate(Handedness handedness)
+	{
+		if (handedness == Handedness.Invalid)
+			throw new ArgumentException("Handeness must be Left or Right", nameof(handedness));
+
+		string name = "MasterXRHand";
+		var result = InputSystem.GetDevice<HandProxyDevice>(name);
+		if (result != null)
+			return result;
+
+		result = InputSystem.AddDevice<HandProxyDevice>(name);
+		InputSystem.SetDeviceUsage(result, handedness == Handedness.Left ? "Left" : "Right");
+		result.Handeness = handedness;
+		return result;
+	}
+
+	public void Dispose() => InputSystem.RemoveDevice(this);
+
+#if UNITY_EDITOR
+	//hack to get "this" file path
+	public static string GetFilePath() => new System.Diagnostics.StackTrace(true).GetFrame(0).GetFileName().Replace(System.IO.Path.GetFullPath(Application.dataPath), "Assets");
+
+	[UnityEditor.InitializeOnLoadMethod]
+#endif
+	private static void InitializeLayouts()
+	{
+#if XRMASTERHANDS_AUTOGEN_DONE
+		UnityEngine.InputSystem.InputSystem.RegisterLayout<HandProxyDevice>();
+#endif
+	}
+}
