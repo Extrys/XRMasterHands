@@ -59,7 +59,7 @@ public class PinchJoystickSimulator : MonoBehaviour, IJoystickSimulator
            	jtVector = Quaternion.Euler(0, -viewAngle + character.eulerAngles.y, 0) * jtVector;
 	    
   		x = (byte)((1 + jtVector.x) * 127);
-		y = (byte)((1 + jtVector.y) * 127);
+		y = (byte)((1 + jtVector.z) * 127);
 
 		Vector3 limitedhorizontal = (normalized * clampedLength);
 		Vector3 limitedVertical = (oNormalized * oClampedLength);
