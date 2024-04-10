@@ -54,7 +54,10 @@ public class PinchJoystickSimulator : MonoBehaviour, IJoystickSimulator
 		Vector3 normalized = vector / (length > 0 ? length : 1); ;
 		float clampedLength = Mathf.Clamp(length, 0, maxDistance);
 		Vector3 jtVector = normalized * clampedLength / maxDistance;
+		float viewAngle = Vector3.SignedAngle(Vector3.forward, rig.Camera.transform.forward, Vector3.up);
+           	jtVector = Quaternion.Euler(0, -viewAngle + character.eulerAngles.y, 0) * jtVector;
 		joystickVector = new Vector2(jtVector.x, jtVector.z);
+
 
 		Vector3 limitedhorizontal = (normalized * clampedLength);
 		Vector3 limitedVertical = (oNormalized * oClampedLength);
