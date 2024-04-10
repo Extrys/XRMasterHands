@@ -7,6 +7,7 @@ public class PinchJoystickSimulator : MonoBehaviour, IJoystickSimulator
 {
 	IStatePerformer joystickStarter;
 	public Vector3 beginPos;
+ 	public XROrigin rig;
 	public Transform character;
 	public float maxDistance = 0.2f;
 	public Vector2 joystickVector;
@@ -21,12 +22,12 @@ public class PinchJoystickSimulator : MonoBehaviour, IJoystickSimulator
 	{
 		this.joystickStarter = statePerformer;
 		joystickStarter.PerformStateChanged += OnPerformStateChanged;
-		XROrigin origin =Object.FindObjectOfType<XROrigin>(true);
-  		if(origin == null)
+		rig =Object.FindObjectOfType<XROrigin>(true);
+  		if(rig == null)
 		{
 			throw new System.Exception("No XROrigin found in scene, XRMasterHands will not work, please add one rig on the scene");
 		}
-		character = origin.Origin.transform;
+		character = rig.Origin.transform;
 		this.jointsUpdatedEventArgs = jointsUpdatedEventArgs;
 	}
 
