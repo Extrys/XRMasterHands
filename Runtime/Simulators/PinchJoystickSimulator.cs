@@ -10,7 +10,6 @@ public class PinchJoystickSimulator : MonoBehaviour, IJoystickSimulator
  	public XROrigin rig;
 	public Transform character;
 	public float maxDistance = 0.2f;
-	public Vector2 joystickVector;
  	public byte x,y;
 	public float visualVerticalPermisivity = .1f;
 	XRHandJointsUpdatedEventArgs jointsUpdatedEventArgs;
@@ -39,7 +38,7 @@ public class PinchJoystickSimulator : MonoBehaviour, IJoystickSimulator
 		if (performState)
 			beginPos = thumbPose.position;
 		else
-			joystickVector = Vector2.zero;
+   			x = y = 0;
 	}
 	void Update()
 	{
@@ -58,10 +57,9 @@ public class PinchJoystickSimulator : MonoBehaviour, IJoystickSimulator
 		Vector3 jtVector = normalized * clampedLength / maxDistance;
 		float viewAngle = Vector3.SignedAngle(Vector3.forward, rig.Camera.transform.forward, Vector3.up);
            	jtVector = Quaternion.Euler(0, -viewAngle + character.eulerAngles.y, 0) * jtVector;
-		joystickVector = new Vector2(jtVector.x, jtVector.z);
-		
-  		x = (byte)((1 + joystickVector.x) * 127);
-		y = (byte)((1 + joystickVector.y) * 127);
+	    
+  		x = (byte)((1 + jtVector.x) * 127);
+		y = (byte)((1 + jtVector.y) * 127);
 
 		Vector3 limitedhorizontal = (normalized * clampedLength);
 		Vector3 limitedVertical = (oNormalized * oClampedLength);
@@ -73,8 +71,6 @@ public class PinchJoystickSimulator : MonoBehaviour, IJoystickSimulator
 		if(clampedLength > 0.001f)
 			transform.forward = character.TransformDirection(endPos - startPos);
 		transform.localScale = new Vector3(1, 1, (endPos - startPos).magnitude);
-
-		//character.position += new Vector3(joystickVector.x, 0, joystickVector.y) * Time.deltaTime * 3;
 	}
 	private void OnDestroy() => joystickStarter.PerformStateChanged -= OnPerformStateChanged;
 
