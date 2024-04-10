@@ -10,11 +10,12 @@ public class PinchJoystickSimulator : MonoBehaviour, IJoystickSimulator
 	public Transform character;
 	public float maxDistance = 0.2f;
 	public Vector2 joystickVector;
+ 	public byte x,y;
 	public float visualVerticalPermisivity = .1f;
 	XRHandJointsUpdatedEventArgs jointsUpdatedEventArgs;
 
-	public byte X => (byte)((1 + joystickVector.x) * 127);
-	public byte Y => (byte)((1 + joystickVector.y) * 127);
+	public byte X => x;
+	public byte Y => y;
 
 	public void Initialize(IStatePerformer statePerformer, XRHandJointsUpdatedEventArgs jointsUpdatedEventArgs)
 	{
@@ -57,7 +58,9 @@ public class PinchJoystickSimulator : MonoBehaviour, IJoystickSimulator
 		float viewAngle = Vector3.SignedAngle(Vector3.forward, rig.Camera.transform.forward, Vector3.up);
            	jtVector = Quaternion.Euler(0, -viewAngle + character.eulerAngles.y, 0) * jtVector;
 		joystickVector = new Vector2(jtVector.x, jtVector.z);
-
+		
+  		x = (byte)((1 + joystickVector.x) * 127);
+		y = (byte)((1 + joystickVector.y) * 127);
 
 		Vector3 limitedhorizontal = (normalized * clampedLength);
 		Vector3 limitedVertical = (oNormalized * oClampedLength);
