@@ -49,6 +49,4 @@ public class ScriptableHandJoystickSimulator : ScriptableJoystickSimulator
 			pinchJoystickSimulator.hideFlags = HideFlags.HideInHierarchy;
 		return pinchJoystickSimulator;
 	}
-
-	public InputAction joystickStarter;
 }
