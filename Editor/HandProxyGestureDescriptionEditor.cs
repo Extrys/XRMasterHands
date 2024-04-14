@@ -51,6 +51,9 @@ public class HandProxyGestureDescriptionEditor : Editor
 		}
 
 		GUILayout.Space(20);
+		var serializedUseOptimizedControlsElement = serializedObject.FindProperty(nameof(HandProxyGestureDescription.useOptimizedControls));
+		EditorGUILayout.PropertyField(serializedUseOptimizedControlsElement, true);
+		GUILayout.Space(20);
 		EditorGUILayout.LabelField("Joystick Pose (Optional)");
 		var serializedJoystickStarterElement = serializedObject.FindProperty(nameof(HandProxyGestureDescription.joystickStarter));
 		EditorGUILayout.PropertyField(serializedJoystickStarterElement, true);

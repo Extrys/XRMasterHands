@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class SampleInputListener : MonoBehaviour
+public class Sample_InputListener : MonoBehaviour
 {
 	[SerializeField] InputAction testingAction;
 	[SerializeField] UnityEvent onTestActionPerformed;

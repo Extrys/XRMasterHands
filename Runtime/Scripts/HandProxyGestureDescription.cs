@@ -6,6 +6,9 @@ using UnityEngine.XR.Hands;
 
 public class HandProxyGestureDescription : ScriptableObject
 {
+	[Tooltip("If this is enabled, this component will enable the Input System internal feature flag 'USE_OPTIMIZED_CONTROLS'. You must have at least version 1.5.0 of the Input System and have its backend enabled for this to take effect.")]
+	public bool useOptimizedControls;
+
 	public HandGestureData joystickStarter;
 	public ScriptableHandJoystickSimulator scriptableSimulator;
 

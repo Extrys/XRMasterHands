@@ -19,8 +19,13 @@
   },
   "samples": [
     {
-      "displayName": "Sample",
-      "description": "Includes a simple scene with an script for testing hand joystick",
-      "path": "Samples~"
+      "displayName": "PoseInteraction",
+      "description": "Includes a simple scene with an script for testing hand joystick and pose detection",
+      "path": "Samples~/PoseInteraction"
+    },
+    {
+      "displayName": "Gestures",
+      "description": "Includes some preconfigured hand poses and shapes, imported from unity xr hands package",
+      "path": "Samples~/Gestures"
     }]
 }

@@ -7,13 +7,22 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Threading;
 using UnityEngine.XR;
+using UnityEngine.InputSystem;
 
 public class XRMasterHand : IDisposable
 {
+	static XRMasterHand left, right;
+	public static XRMasterHand GetCreated(Handedness handedness) => handedness switch
+	{
+		Handedness.Left => left,
+		Handedness.Right => right,
+		_ => null,
+	};
+
 	public event Action OnTrackingAcquiredEvent, OnTrackingLostEvent;
 	public event Action<bool> OnTrackingChanged;
-	public event Action<Pose> OnPoseUpdated;
-	public event Action<XRHandJointsUpdatedEventArgs> OnJointsUpdated;
+	public event Action<Pose> OnPoseUpdated, OnPoseUpdatedVisual;
+	public event Action<XRHandJointsUpdatedEventArgs> OnJointsUpdated, OnJointsUpdatedVisual;
 	public bool IsTracked => m_Subsystem != null && m_Subsystem.running && handIsTracked.Value;
 	public Pose rootPose => handJointsUpdatedEventArgs.hand.rootPose;
 
@@ -29,17 +38,35 @@ public class XRMasterHand : IDisposable
 	CancellationTokenSource cts = new CancellationTokenSource();
 
 	public Handedness handedness { get; private set; }
-	UpdateType updateType = UpdateType.Dynamic;
 	public XRMasterHand(IHandProxyDevice handProxyDevice)
 	{
 		handedness = handProxyDevice.Handeness;
+
+		if(handedness == Handedness.Left)
+		{
+			if (left != null)
+				return;
+			left = this;
+		}
+		else if (handedness == Handedness.Right)
+		{
+			if (right != null)
+				return;
+			right = this;
+		}
+
+		var description = Resources.Load<HandProxyGestureDescription>("HandProxyGestureDescription");
+		if (description != null)
+			InputSystem.settings.SetInternalFeatureFlag("USE_OPTIMIZED_CONTROLS", description.useOptimizedControls);
+
 		ProxyController = handProxyDevice;
-		ProxyController.SetStreams(Resources.Load<HandProxyGestureDescription>("HandProxyGestureDescription"), this);
+		ProxyController.SetStreams(description, this);
 		GetSubsystemAsync(cts.Token).GetAwaiter();
 	}
 
 
-	public async Task GetSubsystemAsync(CancellationToken token)
+
+	async Task GetSubsystemAsync(CancellationToken token)
 	{
 		if (m_Subsystem != null && m_Subsystem.running)
 			return;
@@ -76,7 +103,7 @@ public class XRMasterHand : IDisposable
 		}
 	}
 
-	internal void SetSubsystem(XRHandSubsystem handSubsystem)
+	void SetSubsystem(XRHandSubsystem handSubsystem)
 	{
 		UnsubscribeFromSubsystem();
 
@@ -124,12 +151,6 @@ public class XRMasterHand : IDisposable
 
 	void OnUpdatedHands(XRHandSubsystem subsystem, XRHandSubsystem.UpdateSuccessFlags updateSuccessFlags, XRHandSubsystem.UpdateType updateEventType)
 	{
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		bool UpdatingAs(UpdateType type) => (this.updateType & type) == type;
-		if (updateEventType == XRHandSubsystem.UpdateType.Dynamic && !UpdatingAs(UpdateType.Dynamic) || updateEventType == XRHandSubsystem.UpdateType.BeforeRender && !UpdatingAs(UpdateType.BeforeRender))
-			return;
-
-
 		XRHandSubsystem.UpdateSuccessFlags jointUpdateFlagToCheck;
 		XRHandSubsystem.UpdateSuccessFlags poseUpdateFlagToCheck;
 		if (handedness == Handedness.Left)
@@ -149,12 +170,32 @@ public class XRMasterHand : IDisposable
 		if (requestedJointsUpdated || requestedRootPoseUpdated)
 		{
 			handJointsUpdatedEventArgs.hand = handedness == Handedness.Left ? m_Subsystem.leftHand : m_Subsystem.rightHand;
-			if (requestedJointsUpdated)
-				OnJointsUpdated?.Invoke(handJointsUpdatedEventArgs);
-			if (requestedRootPoseUpdated)
-				OnPoseUpdated?.Invoke(handJointsUpdatedEventArgs.hand.rootPose);
-			ProxyController.RefreshInputs();
+			switch (updateEventType)
+			{
+				case XRHandSubsystem.UpdateType.Dynamic:
+					LogicUpdate(requestedJointsUpdated, requestedRootPoseUpdated);
+					break;
+				case XRHandSubsystem.UpdateType.BeforeRender:
+					VisualUpdate(requestedJointsUpdated, requestedRootPoseUpdated);
+					break;
+			}
+		
 		}
+	}
+	void LogicUpdate(bool requestedJointsUpdated, bool requestedRootPoseUpdated)
+	{
+		if (requestedJointsUpdated)
+			OnJointsUpdated?.Invoke(handJointsUpdatedEventArgs);
+		if (requestedRootPoseUpdated)
+			OnPoseUpdated?.Invoke(handJointsUpdatedEventArgs.hand.rootPose);
+		ProxyController.RefreshInputs();
+	}
+	void VisualUpdate(bool requestedJointsUpdated, bool requestedRootPoseUpdated)
+	{
+		if (requestedJointsUpdated)
+			OnJointsUpdatedVisual?.Invoke(handJointsUpdatedEventArgs);
+		if (requestedRootPoseUpdated)
+			OnPoseUpdatedVisual?.Invoke(handJointsUpdatedEventArgs.hand.rootPose);
 	}
 
 	public void Dispose()
@@ -163,6 +204,8 @@ public class XRMasterHand : IDisposable
 		cts.Dispose();
 		UnsubscribeFromSubsystem();
 		ProxyController.Dispose();
+		left = null;
+		right = null;
 	}
 
 	[Flags]

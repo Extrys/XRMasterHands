@@ -18,9 +18,9 @@
     "defineConstraints": [],
     "versionDefines": [
         {
-            "name": "Select...",
-            "expression": "",
-            "define": ""
+            "name": "com.unity.burst",
+            "expression": "1.6.6",
+            "define": "BURST_PRESENT"
         }
     ],
     "noEngineReferences": false
