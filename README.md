@@ -36,6 +36,7 @@ If you have a fix or an enhancement to propose, feel free to submit a pull reque
 
 ## Features
 
+
 - Generated Hand Proxy Device
   - Automatically generates hand controllers for seamless integration with Unity's Input System, simplifying the setup process and enhancing usability within VR applications.
 - Pose Descriptor for Easy Device Generation Authoring
@@ -62,7 +63,7 @@ Lets start with a basic example!
 //Add an example  
 
 (WIP)
-
+![image](https://github.com/Extrys/XRMasterHands/assets/38926085/950252d9-c67b-475c-ac23-3605c4a536a3)
 # XRMasterHand SkeletonDriver
 This is the XRMasterHandSkeletonDriver monobehaviour component
 // Explain  
