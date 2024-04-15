@@ -6,9 +6,9 @@ using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Hands;
-
 #if BURST_PRESENT
-    [BurstCompile]
+using Unity.Burst;
+[BurstCompile]
 #endif
 public class XRMasterHandSkeletonDriver : MonoBehaviour, ISerializationCallbackReceiver
 {
