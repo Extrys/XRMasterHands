@@ -38,7 +38,7 @@ public class PinchJoystickSimulator : MonoBehaviour, IJoystickSimulator
 		if (performState)
 			beginPos = thumbPose.position;
 		else
-   			x = y = 0;
+   			x = y = 127;
 	}
 	void Update()
 	{

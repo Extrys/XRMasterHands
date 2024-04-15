@@ -99,8 +99,11 @@ public class XRMasterHandSkeletonDriver : MonoBehaviour, ISerializationCallbackR
 			Debug.LogError("Handedness is not set for XRMasterHandSkeletonDriver", this);
 		xrMasterHand = XRMasterHand.GetCreated(handedness);
 
-		rootTransform.localPosition = Vector3.zero;
-		rootTransform.localEulerAngles = Vector3.zero;
+		if (m_HasRootTransform)
+		{
+			rootTransform.localPosition = Vector3.zero;
+			rootTransform.localEulerAngles = Vector3.zero;
+		}
 
 		m_JointLocalPoses = new NativeArray<Pose>(XRHandJointID.EndMarker.ToIndex(), Allocator.Persistent);
 
