@@ -54,7 +54,7 @@ You can also add me on discord `extrys` or [twitter/X](https://twitter.com/Extry
 
 ## Setup
 
-### Adding the Package to Unity
+### Add the Package to Unity
 
 To install the XRMasterHands package:
 
@@ -71,11 +71,10 @@ After the installation is complete, XRMasterHands automatically creates a new fo
 This scriptable object is essential for setting up your controller.
 
 
-### Initial Configuration
 
-To configure your controller for hand interactions, follow these steps:
+###  Configure Your Controller for Hand Interactions
 
-1.  **Navigate to the Resources Folder:**
+1.  **Locate HandProxyGestureDescription:**
     
     -   Go to the "XRMasterHands_Generated/Resources" directory in Unity and locate the `HandProxyGestureDescription` scriptable object. This object is crucial for defining hand poses and interactions specific to your application.
     
