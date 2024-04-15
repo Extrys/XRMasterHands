@@ -50,8 +50,12 @@ Welcome!
 
 # Installation
 Window > Package Manager > + > Add package from git URL... > ``https://github.com/Extrys/XRMasterHands.git``  
-***Its ready to use!***
-(WIP)
+
+![image](https://github.com/Extrys/XRMasterHands/assets/38926085/1ce14ffe-24df-4461-adbc-f2cf6c03e7d1)
+
+And press **"Add"**  
+
+***Now its ready to use!***  
 
 # Basic Usage
 Once everything is ready to start using XRMasterHands, you might want to start using it, otherwise I don't know what you're doing here!  
