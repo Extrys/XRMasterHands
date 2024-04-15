@@ -8,7 +8,7 @@
         "SquirrelBytes.XRMasterHands.Simulators",
         "SquirrelBytes.XRMasterHands.Gestures",
         "SquirrelBytes.XRMasterHands.Abstractions",
-        "SquirrelBytesUnity.Burst"
+        "Unity.Burst"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
