@@ -7,8 +7,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Hands;
 #if BURST_PRESENT
-using Unity.Burst;
-[BurstCompile]
+//using Unity.Burst;
+//[BurstCompile] not suported yet for XRMasterHands package
 #endif
 public class XRMasterHandSkeletonDriver : MonoBehaviour, ISerializationCallbackReceiver
 {
@@ -243,7 +243,7 @@ public class XRMasterHandSkeletonDriver : MonoBehaviour, ISerializationCallbackR
 	}
 
 #if BURST_PRESENT && UNITY_2022_1_OR_NEWER
-        [BurstCompile]
+        //[BurstCompile] not suported yet for XRMasterHands package
 #endif
 	static void CalculateJointTransformLocalPoses(in XRHand hand, ref NativeArray<Pose> jointLocalPoses)
 	{
@@ -277,7 +277,7 @@ public class XRMasterHandSkeletonDriver : MonoBehaviour, ISerializationCallbackR
 	}
 
 #if BURST_PRESENT
-        [BurstCompile]
+        //[BurstCompile] not suported yet for XRMasterHands package
 #endif
 	static void CalculateLocalTransformPose(in Pose parentPose, in Pose jointPose, out Pose jointLocalPose)
 	{
