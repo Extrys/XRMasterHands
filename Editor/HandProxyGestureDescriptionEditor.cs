@@ -95,14 +95,14 @@ public class HandProxyGestureDescriptionEditor : Editor
 		{
 			// checks if the tempPose is null or if the gestureDatas array already contains the tempPose
 			if (tempPose == null)
-				Debug.LogWarning("No se puede agregar un elemento nulo");
+				Debug.LogWarning("You can not add a null element");
 			else if (gestureDatasProp.arraySize > 0)
 			{
 				for (int i = 0; i < gestureDatasProp.arraySize; i++)
 				{
 					if (gestureDatasProp.GetArrayElementAtIndex(i).FindPropertyRelative(nameof(HandGestureData.handPose)).objectReferenceValue == tempPose)
 					{
-						Debug.LogWarning("No se puede agregar un elemento que ya existe");
+						Debug.LogWarning("You can not add an already existing element");
 						tempPose = null;
 						return;
 					}
@@ -113,7 +113,7 @@ public class HandProxyGestureDescriptionEditor : Editor
 			serializedObject.ApplyModifiedProperties();
 			tempPose = null;
 		}
-		// Asegúrate de llamar a este método para que los cambios se reflejen en la UI y se guarde el estado modificado
+
 		serializedObject.ApplyModifiedProperties();
 	}
 }
