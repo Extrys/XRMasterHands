@@ -16,10 +16,10 @@ Welcome!
 
 ## Table Of Contents
 
-  - [Introduction](#introduction)
-  - [Features](#features)
-  - [Installation](#installation)
-  - [Basic Usage](#basic-usage)
+  - [Introduction](#introduction) (wip)
+  - [Features](#features) (wip)
+  - [Installation](#installation) (wip)
+  - [Basic Usage](#basic-usage) (wip)
   - [XRMasterHand SkeletonDriver](#xrmasterhand-skeletondriver) (wip)
   	- [SkeletonDriver Usages and Tricks](#skeletondriver-usages-and-tricks) (wip)
   - [Input Setup](#input-setup) (wip)
