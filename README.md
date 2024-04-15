@@ -13,7 +13,7 @@
 
   - [Introduction](#introduction)
   - [Features](#features)
-  - [Installation](#installation)
+  - [Setup](#setup)
   - [Basic Usage](#basic-usage) (wip)
   - [XRMasterHand SkeletonDriver](#xrmasterhand-skeletondriver) (wip)
   	- [SkeletonDriver Usages and Tricks](#skeletondriver-usages-and-tricks) (wip)
@@ -83,9 +83,9 @@ To configure your controller for hand interactions, follow these steps:
     
 2.  **Know Your Settings:**
     
-	-   **Use Optimized Controls (Needs testing):** Toggle this option to inform the input system to use optimized controls for better performance.
-	-   **Joystick Pose (Optional):** Add a pose for joystick functionality if needed. Upon adding a pose, the "Scriptable Simulator" field will become available where you can include your custom joystick simulation logic. Use the "ScriptablePinchJoystickSimulator" from `Packages/XRMasterHands/Runtime/ScriptableObjects` for a pre-programmed air joystick option.
-    -   **Poses:** Here you add the poses to react to.
+    -   **Poses:** This field is where you add the poses that your controller will react to. Before adding poses, you need to create them. Refer to the [XR Hands documentation](https://docs.unity3d.com/Packages/com.unity.xr.hands@1.4/manual/gestures/custom-gestures.html) for guidance on creating poses. Alternatively, you can use predefined poses by importing the Gestures sample from the XRMasterHands package. This option provides a quick way to implement common gestures and can be a great starting point for testing and further customization.
+    -   **Joystick Pose (Optional):** Add a pose for joystick functionality if needed. Upon adding a pose, the "Scriptable Simulator" field will become available where you can include your custom joystick simulation logic. Use the "ScriptablePinchJoystickSimulator" from `Packages/XRMasterHands/Runtime/ScriptableObjects` for a pre-programmed air joystick option.
+    - **Use Optimized Controls (Needs testing):** Toggle this option to inform the input system to use optimized controls for better performance.
 
 3.  **Add Poses:**
     
@@ -101,13 +101,9 @@ This setup prepares your development environment to utilize XRMasterHands fully,
 
 
 ## Basic Usage
-Once everything is set up and you're ready to start using XRMasterHands, let's dive into a practical example to get you going. If you're here, you're likely eager to see what XRMasterHands can do for your project!  
+Once everything is set up and you're ready to start using XRMasterHands, let's dive into a practical example to get you going. 
 
-### Let's Start With the Samples
-
-Below is a basic example that demonstrates how to integrate XRMasterHands into your project. This will guide you through setting up a simple hand tracking interaction.
-
-(WIP)
+As this package is designed to work seamlessly with the unity input system we are going to use Input actions for it, you can use an InputActionMap or and InputAction field [please refeer to unity's input system documentation for more information]
 
 ## XRMasterHand SkeletonDriver
 This is the XRMasterHandSkeletonDriver monobehaviour component
