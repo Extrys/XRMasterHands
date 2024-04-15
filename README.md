@@ -10,7 +10,7 @@ Welcome!
 
 // Set welcome
 
-**As i have a slight level of dyslextia, im sory before hand for any typo you may find, feel free to contribute fixing them if you find any!**
+**As i have a slight level of dyslextia, im sory before hand** (_never better said_) **for any typo you may find, feel free to contribute fixing them if you find any!**
 (WIP)
 
 
