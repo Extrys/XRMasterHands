@@ -30,8 +30,8 @@ XRMasterHands is designed to simplify the implementation of OpenXR hand tracking
 
 This project is open source.
 
-For general troubleshooting, support, or to report a bug, please submit an issue with the appropriate tag on this repo.  
-If you have a fix or an enhancement to propose, feel free to submit a pull request.
+Please submit an issue with the appropriate tag on this repo for general troubleshooting, support, or bug reporting.  
+Feel free to submit a pull request if you have a fix or an enhancement to propose.
 
 You can also add me on discord `extrys` or [twitter/X](https://twitter.com/ExtrysGO) for direct contact. 
 
