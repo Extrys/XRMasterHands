@@ -24,7 +24,9 @@ public class PinchJoystickSimulator : MonoBehaviour, IJoystickSimulator
 		rig =Object.FindObjectOfType<XROrigin>(true);
   		if(rig == null)
 		{
-			throw new System.Exception("No XROrigin found in scene, XRMasterHands will not work, please add one rig on the scene");
+			Debug.LogError("No XROrigin found in scene, PinchJoystickSimulator will not work, please add one rig on the scene");
+			enabled = false;
+			return;
 		}
 		character = rig.Origin.transform;
 		this.jointsUpdatedEventArgs = jointsUpdatedEventArgs;
