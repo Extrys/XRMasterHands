@@ -20,7 +20,7 @@
   	- [SkeletonDriver Usages and Tricks](#skeletondriver-usages-and-tricks) (wip)
   - [Input Setup](#input-setup) (wip)
   - [Joystick Simulator](#joystick-simulator) (wip)
-
+  - [Projects Using XRMasterHands](#projects-using-xrmasterhands)
 </details>
 
 
@@ -139,7 +139,7 @@ public class HandInteraction : MonoBehaviour
 
 - Attach the `HandInteraction` script to any relevant GameObject in your scene.
 - Assign the Pose control from your "XRMasterHand" controller to the `grabAction` field in the inspector.
-- The pose control should appear inside XRMasterHand, there you will see a list of controls [with the names of the poses you added in your HandProxyGestureDescription](#configure-your-controller-for-hand-interactions)
+- The pose control should appear inside XRMasterHand, you will see a list of controls [with the names of the poses you added in your HandProxyGestureDescription](#configure-your-controller-for-hand-interactions)
 
 ![image](https://github.com/Extrys/XRMasterHands/assets/38926085/e1d47edf-e906-4cd4-9d85-51fb77c01676)
 ![image](https://github.com/Extrys/XRMasterHands/assets/38926085/173f8581-4b5f-4451-a695-0ba1c7176f1d)
@@ -157,23 +157,11 @@ public class HandInteraction : MonoBehaviour
 This basic setup demonstrates how to use XRMasterHands with Unity's input system to react to specific hand gestures. You can expand upon this example by adding more actions and refining the gesture controls as needed for your project.
 
 
-## XRMasterHand SkeletonDriver
-This is the XRMasterHandSkeletonDriver monobehaviour component
-// Explain  
+## XRMasterHand SkeletonDriver (WIP)
 
-(WIP)
+### SkeletonDriver Usages and Tricks (WIP)
 
-### SkeletonDriver Usages and Tricks
-Tricks and so  
-
-(WIP)
-
-
-
-
-## Joystick Simulator
-(WIP)
-
+## Joystick Simulator (WIP)
 
 ## Projects Using XRMasterHands
 
@@ -184,7 +172,7 @@ I love to see how XRMasterHands is being used in diverse projects! If you are us
 To submit your project for inclusion:
 
 1.  Go to the [Issues section of my GitHub repository].
-2.  Create a new issue with the tag "project submission" and [Your Project Name] as title.
+2.  Create a new issue with the tag "project submission" and [Your Project Name] as the title.
 3.  In the body of the issue, you can include a brief description of your project, how XRMasterHands has been integrated, and any relevant links or images.
 4.  Submit the issue. I will review submissions regularly and update the list accordingly.
 
