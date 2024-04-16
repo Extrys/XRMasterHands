@@ -35,7 +35,7 @@ Feel free to submit a pull request if you have a fix or an enhancement to propos
 
 You can also add me on discord `extrys` or [twitter/X](https://twitter.com/ExtrysGO) for direct contact. 
 
-*As i have a slight level of dyslextia, im sorry before hand (never better said) for any typo you may find, feel free to contribute fixing them if you find any!*
+*As i have a slight level of dyslextia, im sorry before hand for any typo you may find, feel free to contribute fixing them if you find any!*
 
 ## Features
 
