@@ -14,7 +14,8 @@
   - [Introduction](#introduction)
   - [Features](#features)
   - [Setup](#setup)
-  - [Basic Usage](#basic-usage) (wip)
+    - [Configure Your Controller for Hand Interactions](#configure-your-controller-for-hand-interactions)
+  - [Basic Usage](#basic-usage)
   - [XRMasterHand SkeletonDriver](#xrmasterhand-skeletondriver) (wip)
   	- [SkeletonDriver Usages and Tricks](#skeletondriver-usages-and-tricks) (wip)
   - [Input Setup](#input-setup) (wip)
@@ -34,7 +35,7 @@ If you have a fix or an enhancement to propose, feel free to submit a pull reque
 
 You can also add me on discord `extrys` or [twitter/X](https://twitter.com/ExtrysGO) for direct contact. 
 
-*As i have a slight level of dyslextia, im sory before hand (never better said) for any typo you may find, feel free to contribute fixing them if you find any!*
+*As i have a slight level of dyslextia, im sorry before hand (never better said) for any typo you may find, feel free to contribute fixing them if you find any!*
 
 ## Features
 
@@ -74,6 +75,11 @@ This scriptable object is essential for setting up your controller.
 
 ###  Configure Your Controller for Hand Interactions
 
+
+0.  **Ensure your scene uses one XR Rig Component:** 
+	-   Currently, for poses to function correctly, your scene must include at least one XR Rig component. This requirement is intended to be removed in future updates, but for now, it is necessary.
+		- *Integrating this component into your custom rig should not impact other functionalities as it is used primarily for reference holding.*
+
 1.  **Locate HandProxyGestureDescription:**
     
     -   Go to the "XRMasterHands_Generated/Resources" directory in Unity and locate the `HandProxyGestureDescription` scriptable object. This object is crucial for defining hand poses and interactions specific to your application.
@@ -99,10 +105,57 @@ This scriptable object is essential for setting up your controller.
 This setup prepares your development environment to utilize XRMasterHands fully, enhancing your VR projects with its capabilities.
 
 
-## Basic Usage
-Once everything is set up and you're ready to start using XRMasterHands, let's dive into a practical example to get you going. 
 
-As this package is designed to work seamlessly with the unity input system we are going to use Input actions for it, you can use an InputActionMap or and InputAction field [please refeer to unity's input system documentation for more information]
+## Basic Usage
+
+XRMasterHands utilizes Unity's Input Actions, which allow for flexible and customizable control definitions. You can define these actions through an `InputActionMap` or an individual `InputAction`. For detailed guidance on setting up and using Input Actions, please refer to [Unity's Input System Documentation](https://docs.unity3d.com/Packages/com.unity.inputsystem@1.7/manual/index.html).
+
+Let’s walk through a basic example to demonstrate how to configure and use an Input Action with XRMasterHands.
+Here’s a simple script to detect when the "Grab" action is triggered:
+
+```csharp
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class HandInteraction : MonoBehaviour
+{
+    public InputAction grabAction, joystickAction;
+
+	void Awake()
+	{
+	    grabAction.Enable();
+		joystickAction.Enable();
+		grabAction.performed += OnGrabTriggered;
+	}
+    private void OnDestroy() => grabAction.performed -= OnGrabTriggered;
+    
+	void OnGrabTriggered(InputAction.CallbackContext ctx) => Debug.Log("Grab action triggered!");
+	
+	void Update() => Debug.Log($"Joystic with values {joystickAction.ReadValue<Vector2>()}");
+}
+```
+
+#### Attach the Script
+
+- Attach the `HandInteraction` script to any relevant GameObject in your scene.
+- Assign the Pose control from your "XRMasterHand" controller to the `grabAction` field in the inspector.
+- The pose control should appear inside XRMasterHand, there you will see a list of controls [with the names of the poses you added in your HandProxyGestureDescription](#configure-your-controller-for-hand-interactions)
+
+![image](https://github.com/Extrys/XRMasterHands/assets/38926085/e1d47edf-e906-4cd4-9d85-51fb77c01676)
+![image](https://github.com/Extrys/XRMasterHands/assets/38926085/173f8581-4b5f-4451-a695-0ba1c7176f1d)
+
+
+
+### Test the Setup
+
+-   Enter Play mode in Unity and perform the assigned gesture. You should see "Grab action triggered!" logged in the console whenever the action is recognized.
+
+- You can also set the "joystick" control (if you have configured it) and perform the joystick starter pose. If you used the premade joystick simulator, the console should print its vector value and you should see an arrow like this  
+![image](https://github.com/Extrys/XRMasterHands/assets/38926085/c923dcf1-70d2-4ee3-94df-458131c38f56)
+
+
+This basic setup demonstrates how to use XRMasterHands with Unity's input system to react to specific hand gestures. You can expand upon this example by adding more actions and refining the gesture controls as needed for your project.
+
 
 ## XRMasterHand SkeletonDriver
 This is the XRMasterHandSkeletonDriver monobehaviour component
@@ -115,11 +168,7 @@ Tricks and so
 
 (WIP)
 
-![image](https://github.com/Extrys/XRMasterHands/assets/38926085/e1d47edf-e906-4cd4-9d85-51fb77c01676)
-![image](https://github.com/Extrys/XRMasterHands/assets/38926085/173f8581-4b5f-4451-a695-0ba1c7176f1d)
 
-
-![Uploading image.png…]()
 
 
 ## Joystick Simulator
