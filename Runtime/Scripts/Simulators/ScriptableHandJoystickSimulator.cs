@@ -46,7 +46,7 @@ public class ScriptableHandJoystickSimulator : ScriptableJoystickSimulator
 		PinchJoystickSimulator pinchJoystickSimulator = arrow.AddComponent<PinchJoystickSimulator>();
 		pinchJoystickSimulator.gameObject.SetActive(false);
 		if(Application.isPlaying)
-			pinchJoystickSimulator.hideFlags = HideFlags.HideInHierarchy;
+			pinchJoystickSimulator.gameObject.hideFlags = HideFlags.HideInHierarchy;
 		return pinchJoystickSimulator;
 	}
 }

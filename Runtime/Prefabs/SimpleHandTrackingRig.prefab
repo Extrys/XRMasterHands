@@ -184,7 +184,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7545014317440238945}
-  - component: {fileID: 7505831508167399543}
+  - component: {fileID: 3446690840397945026}
   m_Layer: 0
   m_Name: SimpleHandTrackingRig
   m_TagString: Untagged
@@ -210,7 +210,7 @@ Transform:
   - {fileID: 5738425329206812318}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7505831508167399543
+--- !u!114 &3446690840397945026
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -219,10 +219,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8533970501455006381}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0cb9aa70a22847b5925ee5f067c10a9, type: 3}
+  m_Script: {fileID: 11500000, guid: de1395b075e0d4643a0bb4d86ecd12ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Camera: {fileID: 2954705755887521368}
+  m_Camera: {fileID: 0}
   m_OriginBaseGameObject: {fileID: 8533970501455006381}
   m_CameraFloorOffsetObject: {fileID: 0}
   m_RequestedTrackingOriginMode: 2
