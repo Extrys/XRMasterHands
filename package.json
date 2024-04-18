@@ -1,6 +1,6 @@
 {
   "name": "com.squirrelbytes.xrmasterhands",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "displayName": "XR Master Hands",
   "description": "Framework for simplifying the usage of XR Hands by automagically creating a special XR Device which implements designed hand poses as buttons for using with the unity's Input System Package",
   "unity": "2022.3",
