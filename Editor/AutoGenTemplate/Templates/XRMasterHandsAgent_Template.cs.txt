@@ -22,7 +22,7 @@ public class XRMasterHandsAgent : MonoBehaviour
 	}
 
 #if !SKIP_MASTERXRHANDS_AUTO_INSTANCING
-	[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+	[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
 	static void CreateHandPair()
 	{
 		if (!Application.isPlaying) 

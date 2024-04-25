@@ -97,6 +97,8 @@ public class HandProxyDevice : InputDevice, IHandProxyDevice
 	public static string GetFilePath() => new System.Diagnostics.StackTrace(true).GetFrame(0).GetFileName().Replace(System.IO.Path.GetFullPath(Application.dataPath), "Assets");
 
 	[UnityEditor.InitializeOnLoadMethod]
+#else
+	[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
 #endif
 	private static void InitializeLayouts()
 	{
