@@ -4,9 +4,6 @@
 <p align="center">
   <img src="https://github.com/Extrys/XRMasterHands/assets/38926085/8f0f3ed4-f6ad-4ee5-9c91-ebf21cfc4553">
 </p>
-<p align="center">
-  Documentation in progress...
-</p>
 
 ## Table Of Contents
 <details>
@@ -17,7 +14,7 @@
   - [Setup](#setup)
     - [Configure Your Controller for Hand Interactions](#configure-your-controller-for-hand-interactions)
   - [Basic Usage](#basic-usage)
-  - [XRMasterHand SkeletonDriver](#xrmasterhand-skeletondriver) (wip)
+  - [XRMasterHand SkeletonDriver](#xrmasterhand-skeletondriver)
   - [Joystick Simulator](#joystick-simulator)
   - [Projects Using XRMasterHands](#projects-using-xrmasterhands)
 </details>
