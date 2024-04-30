@@ -18,8 +18,7 @@
     - [Configure Your Controller for Hand Interactions](#configure-your-controller-for-hand-interactions)
   - [Basic Usage](#basic-usage)
   - [XRMasterHand SkeletonDriver](#xrmasterhand-skeletondriver) (wip)
-  - [Input Setup](#input-setup) (wip)
-  - [Joystick Simulator](#joystick-simulator) (wip)
+  - [Joystick Simulator](#joystick-simulator)
   - [Projects Using XRMasterHands](#projects-using-xrmasterhands)
 </details>
 
