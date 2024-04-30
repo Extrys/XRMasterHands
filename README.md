@@ -1,5 +1,6 @@
 
 
+
 <p align="center">
   <img src="https://github.com/Extrys/XRMasterHands/assets/38926085/8f0f3ed4-f6ad-4ee5-9c91-ebf21cfc4553">
 </p>
@@ -17,7 +18,6 @@
     - [Configure Your Controller for Hand Interactions](#configure-your-controller-for-hand-interactions)
   - [Basic Usage](#basic-usage)
   - [XRMasterHand SkeletonDriver](#xrmasterhand-skeletondriver) (wip)
-  	- [SkeletonDriver Usages and Tricks](#skeletondriver-usages-and-tricks) (wip)
   - [Input Setup](#input-setup) (wip)
   - [Joystick Simulator](#joystick-simulator) (wip)
   - [Projects Using XRMasterHands](#projects-using-xrmasterhands)
@@ -157,21 +157,50 @@ public class HandInteraction : MonoBehaviour
 This basic setup demonstrates how to use XRMasterHands with Unity's input system to react to specific hand gestures. You can expand upon this example by adding more actions and refining the gesture controls as needed for your project.
 
 
-## XRMasterHand SkeletonDriver (WIP)
+## XRMasterHand SkeletonDriver
 
-### SkeletonDriver Usages and Tricks (WIP)
+The XRMasterHand SkeletonDriver is an optional component specifically designed for controlling hand armatures within your scene. This driver is key for visualizing hands, adding custom collisions, or applying modifications to the finger bones.
+![GIF 30-04-2024 15-43-18](https://github.com/Extrys/XRMasterHands/assets/38926085/46020333-d56b-4fb5-adbf-d974b10820ca)
+The package includes ready-to-use hand prefabs imported from XR Hands. The XRMasterHand SkeletonDriver automatically sets up the rig references inside by bone names, eliminating the need to manually assign each bone.
 
-## Joystick Simulator (WIP)
+**Customization tips**
+While automatic setup is provided, you retain the ability to manually adjust or remove bones. This is particularly useful for integrating the hand with other systems or custom behaviors.
+For example, if you wish for your hands to be controlled by physics, you can remove the `Wirst` element and `Root Transform` field. This allows the hand to respond to finger tracking while enabling you to move its root in a custom manner, such as by adding a rigidbody and collider. This setup prevents the hands from passing through walls and ensures they interact realistically with the virtual environment.
+![GIF 30-04-2024 15-37-21](https://github.com/Extrys/XRMasterHands/assets/38926085/ed198032-6151-43a4-a572-3cb3cf98f34f)
+
+
+## Joystick Simulator
+
+The Joystick Simulator component is a powerful feature of this package, designed to enhance interaction within your VR environment by simulating joystick controls. These simulators can be found in the package's directory structure under `Runtime > Scripts > Simulator`.
+
+### Understanding Joystick Simulators
+
+Joystick simulators work by creating instances of `IJoystickSimulators` from scriptable objects. These instances determine the vector inputs for the generated hand device.
+
+#### **Key Scripts**
+-   **ScriptableHandJoystickSimulator.cs**
+-   **PinchJoystickSimulator.cs**
+
+These scripts are concise to facilitate quick understanding and easy integration into your projects. They serve as excellent starting points for learning how to implement your own joystick simulators.
+![GIF 30-04-2024 16-31-29](https://github.com/Extrys/XRMasterHands/assets/38926085/5bd2dd01-f601-4c00-b8d5-079dc2121204)
+#### Creating and Integrating Your Joystick Simulator
+
+1.  **Develop Your ScriptableJoystickSimulator:**
+    -   Create a new script that extends from the base ScriptableJoystickSimulator script provided. This script will generate the `IJoystickSimulator` instances needed for your controller to read vectors.
+2.  **Create a Scriptable Asset:**
+    -   Once your script is ready, create a scriptable object asset from it. This asset serves as a configurable template that you can tweak within Unity's editor.
+3.  **Add to GestureDescriptionAsset:**
+    -   Integrate your scriptable joystick simulator by adding it to the `GestureDescriptionAsset`. This action will automatically inject the generated `IJoystickSimulator` into the controllers, seamlessly integrating your custom joystick logic.
 
 ## Projects Using XRMasterHands
 
-I love to see how XRMasterHands is being used in diverse projects! If you are using this package and would like your project to be featured in this list, please post an issue on my GitHub repository with the details of your project. I welcome submissions from all types of applications and look forward to showcasing how XRMasterHands is helping to innovate and enhance virtual reality experiences.
+I love to see how XRMasterHands is being used in diverse projects! If you are using this package and would like your project to be featured in this list, please post an issue on this GitHub repository with the details of your project. I welcome submissions from all types of applications and look forward to showcasing how XRMasterHands is helping to innovate and enhance virtual reality experiences.
 
 ### How to Submit Your Project
 
 To submit your project for inclusion:
 
-1.  Go to the [Issues section of my GitHub repository].
+1.  Go to the [Issues section of this GitHub repository].
 2.  Create a new issue with the tag "project submission" and [Your Project Name] as the title.
 3.  In the body of the issue, you can include a brief description of your project, how XRMasterHands has been integrated, and any relevant links or images.
 4.  Submit the issue. I will review submissions regularly and update the list accordingly.
