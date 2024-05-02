@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.IO;
+using System.Linq;
+using UnityEditor.Build;
 
 public static class XRMasterHands_Generator
 {
@@ -38,10 +40,8 @@ public static class XRMasterHands_Generator
 			File.WriteAllText(newFilePath, text);
 		}
 
-		string directive = "XRMASTERHANDS_AUTOGEN_DONE";
-		PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Standalone, directive);
-		PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.PS5, directive);
-		PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Android, directive);
+		string define = "XRMASTERHANDS_AUTOGEN_DONE";
+		AddDefineToAllPlatforms(define);
 
             HandProxyGestureDescription desc = ScriptableObject.CreateInstance<HandProxyGestureDescription>();
 		if (!Directory.Exists(resultPath+ "/Resources"))
@@ -50,6 +50,28 @@ public static class XRMasterHands_Generator
 			AssetDatabase.CreateAsset(desc, $"{resultPath}/Resources/HandProxyGestureDescription.asset");
 		AssetDatabase.Refresh();
 	}
+
+	static void AddDefine(NamedBuildTarget namedBuildTarget,string define)
+	{
+		PlayerSettings.GetScriptingDefineSymbols(namedBuildTarget, out string[] defines);
+		if (defines.Contains(define))
+			return;
+		string newDefines = string.Join(";", defines) + ";" + define;
+		PlayerSettings.SetScriptingDefineSymbols(namedBuildTarget, newDefines);
+	}
+	static void AddDefineToAllPlatforms(string define)
+	{
+		BuildTargetGroup[] buildTargetGroups = (BuildTargetGroup[])System.Enum.GetValues(typeof(BuildTargetGroup));
+		for (int i = 0; i < buildTargetGroups.Length; i++)
+		{
+			if (buildTargetGroups[i] != BuildTargetGroup.Unknown)
+			{
+				try { AddDefine(NamedBuildTarget.FromBuildTargetGroup(buildTargetGroups[i]), define); }
+				catch { continue;}
+			}
+		}
+	}
+
 #endif
 	//hack to get "this" file path
 	public static string GetTemplatesFolder()
