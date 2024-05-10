@@ -43,10 +43,6 @@ You can also add me on discord `extrys` or [twitter/X](https://twitter.com/Extry
   - *Offers straightforward control over hand skeletons, simplifying interactions with hand rigs.*
 - **Joystick Simulator Framework**
   - *Incorporate your own joystick logic into the hand controllers.*
-- **Extends XR Hand Controller** ***(WORK IN PROGRESS)***
-  - *Enhances XR hand controllers by adding advanced features such as velocity tracking and finger state recognition.*
-
-
 
 
 ## Setup
