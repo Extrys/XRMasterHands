@@ -20,6 +20,8 @@ public class HandProxyDevice : InputDevice, IHandProxyDevice
 	public Handedness Handeness { get; private set; }
 
 	IJoystickSimulator joystickSimulator = new NullJoystickSimulator();
+	[InputControl] public Vector3Control velocity { get; private set; }
+	[InputControl] public Vector3Control angularVelocity { get; private set; }
 	[InputControl] public Vector2Control joystick { get; private set; }
 	[InputControl] public ButtonControl JoystickStarter { get; private set; }
 	#region PROXIED_BUTTONCONTROLS ---> AUTOGEN
@@ -27,6 +29,8 @@ public class HandProxyDevice : InputDevice, IHandProxyDevice
 
 	protected override void FinishSetup()
 	{
+		velocity = GetChildControl<Vector3Control>("velocity");
+		angularVelocity = GetChildControl<Vector3Control>("angularVelocity");
 		joystick = GetChildControl<Vector2Control>("joystick");
 		JoystickStarter = GetChildControl<ButtonControl>("JoystickStarter");
 		#region BUTTONCONTROLS_SETUP ---> AUTOGEN
@@ -37,11 +41,13 @@ public class HandProxyDevice : InputDevice, IHandProxyDevice
 	public void SetJoystickSimulator(IJoystickSimulator joystickSimulator) => this.joystickSimulator = joystickSimulator;
 	public void SetStreams(HandProxyGestureDescription desc, XRMasterHand xrMasterHand)
 	{
+		velocityStream = new HandVelocityStream(xrMasterHand);
 		joystickStarterStream = desc.GenerateJoystickStarterStream(xrMasterHand);
 		streams = desc.GenerateStreams(xrMasterHand);
 		SetJoystickSimulator(desc.GenerateJoystickSimulator(joystickStarterStream, xrMasterHand.handJointsUpdatedEventArgs));
 	}
 
+	HandVelocityStream velocityStream;
 	HandGestureStream joystickStarterStream;
 	HandGestureStream[] streams;
 
@@ -50,6 +56,8 @@ public class HandProxyDevice : InputDevice, IHandProxyDevice
 	{
 		state = new State
 		{
+			velocity = velocityStream.velocity,
+			angularVelocity = velocityStream.angularVelocity,
 			joystickX = joystickSimulator.X,
 			joystickY = joystickSimulator.Y,
 			joystickStarter = joystickStarterStream.performState,
@@ -62,7 +70,10 @@ public class HandProxyDevice : InputDevice, IHandProxyDevice
 	[StructLayout(LayoutKind.Sequential)]
 	public struct State : IInputStateTypeInfo
 	{
-		public FourCC format => new FourCC('H', 'T', 'P', 'C');
+		public FourCC format => new FourCC('X', 'R', 'M', 'H');
+		// velocities Definition
+		[InputControl(name = "velocity", layout = "Vector3", format = "VC3B", noisy = true)] public Vector3 velocity;
+		[InputControl(name = "angularVelocity", layout = "Vector3", format = "VC3B", noisy = true)] public Vector3 angularVelocity;
 		//Joystick Definition 
 		[InputControl(name = "joystick", layout = "Vector2", format = "VC2B")]
 		[InputControl(name = "joystick/x", offset = 0, format = "BYTE", parameters = "normalize,normalizeMin=0,normalizeMax=0.996078431372549,normalizeZero=0.5")] public byte joystickX;
