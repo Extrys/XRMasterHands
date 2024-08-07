@@ -10,7 +10,7 @@ using UnityEngine.XR.Hands;
 //using Unity.Burst;
 //[BurstCompile] not suported yet for XRMasterHands package
 #endif
-public class XRMasterHandSkeletonDriver : MonoBehaviour, ISerializationCallbackReceiver
+public class XRMasterHandSkeletonDriver : MonoBehaviour
 {
 	[SerializeField] Handedness handedness;
 	XRMasterHand xrMasterHand;
@@ -92,6 +92,10 @@ public class XRMasterHandSkeletonDriver : MonoBehaviour, ISerializationCallbackR
 		}
 	}
 
+	private void Awake()
+	{
+		InitializeFromSerializedReferences();
+	}
 	//subscribes to hand tracking events and allocates the joint local poses array.
 	protected virtual void OnEnable()
 	{
@@ -322,7 +326,4 @@ public class XRMasterHandSkeletonDriver : MonoBehaviour, ISerializationCallbackR
 	/// </remarks>
 	/// <param name="missingJointNames">A list of strings to list the joints that were not found.</param>
 	public virtual void FindJointsFromRoot(List<string> missingJointNames) => XRMasterHandSkeletonDriverUtility.FindJointsFromRoot(this, missingJointNames);
-
-	void ISerializationCallbackReceiver.OnBeforeSerialize() { }
-	void ISerializationCallbackReceiver.OnAfterDeserialize() => InitializeFromSerializedReferences();
 }
